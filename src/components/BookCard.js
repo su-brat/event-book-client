@@ -18,25 +18,20 @@ export default function BookCard(props) {
     const [eventStartTime, setStartTime] = useState('');
     const today = new Date();
     const currentDate = new Date(dateString(today));
-    console.log(currentDate);
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log('eventDate I am submitted');
         let startTime = document.getElementById('startTime').value;
         let endTime = document.getElementById('endTime').value;
-        console.log(`startTime: ${startTime}`);
-        console.log(`endTime: ${endTime}`);
         if(startTime.length<9 && endTime.length<9) {
             const startDateAndTime = dateString(eventDate) + " " + startTime;
             const endDateAndTime = dateString(eventDate) + " " + endTime;
             const response = await axios.post('http://localhost:3001/api/request-booking', { startDateAndTime, endDateAndTime, propId: props.propId, userId: uuid() });
-            console.log(response.data);
+            // redirect response to PostResult page
         }
     }
 
     const generateTextTimes = (exclusion) => {
-        console.log(exclusion);
         let arr = [];
         for(let i = 0; i < 24; i++) {
             let skip = false;
@@ -57,14 +52,11 @@ export default function BookCard(props) {
     }
 
     const generateTextEndTimes = (exclusion) => {
-        console.log(exclusion);
         let arr = [];
         for(let i = parseInt(eventStartTime.split(':')[0])+1; i < 24; i++) {
             let stop = false;
             for(let j = 0; j < exclusion.length; j++) {
-                console.log(exclusion[j]);
                 if(i>new Date(exclusion[j].startDateTime).getHours() && i<=new Date(exclusion[j].endDateTime).getHours()) {
-                    console.log('stop');
                     stop = true;
                     break;
                 }
@@ -81,11 +73,9 @@ export default function BookCard(props) {
 
     useEffect(() => {
         const fetchBookedDates = async () => {
-            console.log('Entered effect...');
             const startDateTime = dateTimeString(eventDate);
             const endDateTime = dateString(eventDate)+" 23:59:59";
             const response = await axios.get(`http://localhost:3001/api/event-bookings?propId=${props.propId}&fromDate=${startDateTime}&toDate=${endDateTime}`);
-            console.log(response);
             setBookedDates(response.data.bookings.map(booking => {
                 return {startDateTime: booking.startDateAndTime, endDateTime: booking.endDateAndTime}
             }));
