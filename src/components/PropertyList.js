@@ -83,12 +83,11 @@ export default function PropertyList(props) {
     useEffect(() => {
         dispatch({type: "LOADING"});
         const {city, lng, lat} = props;
-        console.log(city, lng, lat); //to be removed 
-        let query;
+        let query = 'available=true&';
         if(lng && lat)
-            query = `lng=${lng}&lat=${lat}&dist=30`;
+            query += `lng=${lng}&lat=${lat}&dist=30`;
         else
-            query = `city=${city}`;
+            query += `city=${city}`;
         axios.get(`http://localhost:3001/api/props?${query}`)
         .then(res => res.data.props)
         .then(properties => dispatch({type: "SET_PROPERTIES", payload: properties}))
@@ -99,7 +98,7 @@ export default function PropertyList(props) {
             {state.isLoading && <div className="text-secondary">Loading...</div>}
             {/* {defaultProperties.length>0 ? ( */}
             {!state.isLoading && (state.properties.length>0 ? (
-                <div className="row row-cols-sm-2 row-cols-lg-3">
+                <div className="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                     {/* {defaultProperties.map(property => { */}
                     {state.properties.map(property => {
                         return <div key={property._id} className="col"><PropertyCard {...property}/></div>;

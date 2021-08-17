@@ -2,13 +2,12 @@ import React from "react";
 import {Carousel} from "react-bootstrap";
 
 export default function CarouselComponent(props) {
-    console.log(props);
     return (
         <div className="shadow bg-dark m-4 p-4">
             <Carousel interval={null}>
                 {props.images && props.images.length > 0 ? (
                     props.images.map((image, index) => (
-                        <Carousel.Item>
+                        <Carousel.Item key={image.url}>
                             <img
                                 className="d-block w-100"
                                 src={image.url}
