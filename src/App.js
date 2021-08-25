@@ -8,6 +8,7 @@ import PostResult from './PostResult';
 import PropertyPage from './PropertyPage';
 import Login from './Login';
 import Signup from './Signup';
+import Profile from './Profile';
 import BookingList from './BookingList';
 
 import SessionProvider from './contexts/session.context';
@@ -15,20 +16,6 @@ import SessionProvider from './contexts/session.context';
 function App() {
     return (
         <div>
-            {/* <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                >
-                Learn React
-                </a>
-            </header> */}
             <SessionProvider>
                 <ToggleNavbar />
                 <Switch>
@@ -36,6 +23,7 @@ function App() {
                     <Route exact path="/about-us" component={About} />
                     <Route exact path="/post-result" component={PostResult} />
                     <Route exact path="/bookings" component={BookingList} />
+                    <Route exact path="/profile" component={Profile} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Signup} />
                     <Route exact path="/" component={Home} />
