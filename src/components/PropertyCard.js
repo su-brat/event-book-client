@@ -6,7 +6,7 @@ export default function PropertyCard(props) {
     return (
         <div className="card shadow property-card m-2 mx-auto">
             <Link className="btn p-0" to={`/props/${props._id}`}>
-                <img src={props.images?props.primaryImage:null} className="card-img-top" alt="No image" />
+                <img src={props.images?props.primaryImage:null} className="card-img-top" alt="Not found" />
                 <div className="card-body">
                     <h5 className="card-title">{props.name}</h5>
                     <div className="row row-cols-auto mx-auto mt-2">

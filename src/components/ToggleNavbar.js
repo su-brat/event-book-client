@@ -29,7 +29,7 @@ export default withRouter(function ToggleNavbar(props) {
                             </li>
                             <li className="nav-item p-1 nav-link m-auto"> │ </li>
                             <li className="nav-item p-1 m-auto">
-                                <a className="nav-link" href="#">{user.name}</a>
+                                <Link className="nav-link" to="/profile">{user.name}</Link>
                             </li>
                             <li className="nav-item p-1 m-auto">
                                 <button onClick={() => {

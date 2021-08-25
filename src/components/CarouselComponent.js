@@ -11,7 +11,7 @@ export default function CarouselComponent(props) {
                             <img
                                 className="d-block w-100"
                                 src={image.url}
-                                alt={`Image ${index+1}`}
+                                alt="Not found"
                             />
                             <Carousel.Caption>
                                 <h3>Image {index+1}</h3>

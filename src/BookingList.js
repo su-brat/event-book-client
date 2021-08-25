@@ -19,7 +19,7 @@ export default function BookingList(props) {
             }
         }
         fetchBookings();
-    }, []);
+    }, [user]);
     return (
         <div className="mt-5 pt-3 container">
             <div className="row row-cols-auto">
