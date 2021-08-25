@@ -10,7 +10,7 @@ export default function FindPropForm(props) {
         props.onSubmit({city: fieldValue});
     }
     function onLocate(e) {
-        window.navigator.geolocation.getCurrentPosition(position => props.onSubmit({lng: position.coords.longitude, lat: position.coords.latitude}));
+        navigator.geolocation.getCurrentPosition(position => props.onSubmit({lng: position.coords.longitude, lat: position.coords.latitude}), error => console.log(error), {enableHighAccuracy: true, timeout: 5000});
     }
     return (
         <div className="card">

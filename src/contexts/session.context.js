@@ -1,5 +1,6 @@
 import React, {createContext, useState, useEffect} from 'react';
 import axios from 'axios';
+import {API_BASE} from '../global/variables';
 
 const SessionContext = createContext();
 
@@ -8,7 +9,7 @@ export default function SessionProvider(props) {
     async function fetchSession() {
         console.log('Fetch session');
         try {
-            const response = await axios.get('http://localhost:3001/customer/current-user', {
+            const response = await axios.get(`${API_BASE}/customer/current-user`, {
                 withCredentials: true
             });
             setSession(response.data);
@@ -20,7 +21,7 @@ export default function SessionProvider(props) {
     async function destroySession() {
         console.log('Destroy session');
         try {
-            const response = await axios.post('http://localhost:3001/customer/logout', {}, {
+            const response = await axios.post(`${API_BASE}/customer/logout`, {}, {
                 withCredentials: true
             });
             if(response.data.message==='success') {

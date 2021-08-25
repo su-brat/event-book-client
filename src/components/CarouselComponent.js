@@ -3,7 +3,7 @@ import {Carousel} from "react-bootstrap";
 
 export default function CarouselComponent(props) {
     return (
-        <div className="shadow bg-dark m-4 p-4">
+        <div className="shadow bg-dark m-3 p-2">
             <Carousel interval={null}>
                 {props.images && props.images.length > 0 ? (
                     props.images.map((image, index) => (

@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
 import { SessionContext } from './contexts/session.context';
 import axios from 'axios';
+import {API_BASE} from './global/variables';
 
 export default function Signup(props) {
     const {session: user, fetchSession} = useContext(SessionContext);
@@ -18,7 +19,7 @@ export default function Signup(props) {
             const phone = e.target.phone.value;
             if(password===confirmPassword) {
                 try {
-                    const response = await axios.post('http://localhost:3001/customer/register', {name, email, password, phone}, {
+                    const response = await axios.post(`${API_BASE}/customer/register`, {name, email, password, phone}, {
                         withCredentials: true
                     });
                     if(response.data.message === 'success') {

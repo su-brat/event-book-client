@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
 import { SessionContext } from './contexts/session.context';
 import axios from 'axios';
+import {API_BASE} from './global/variables';
 
 export default function Login(props) {
     const {session: user, fetchSession} = useContext(SessionContext);
@@ -15,7 +16,7 @@ export default function Login(props) {
             const username = e.target.username.value;
             const password = e.target.password.value;
             try {
-                const response = await axios.post('http://localhost:3001/customer/login', {username, password}, {
+                const response = await axios.post(`${API_BASE}/customer/login`, {username, password}, {
                     withCredentials: true
                 });
                 if(response.data.message==='success') {

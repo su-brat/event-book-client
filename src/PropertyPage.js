@@ -3,6 +3,7 @@ import CarouselComponent from './components/CarouselComponent';
 import {v4 as uuid} from 'uuid';
 import BookCard from './components/BookCard';
 import axios from 'axios';
+import {API_BASE} from './global/variables';
 
 export default function PropertyPage(props) {
     const [state, setState] = useState(null);
@@ -11,7 +12,7 @@ export default function PropertyPage(props) {
         async function loadData() {
             try {
                 const id = props.match.params.id;
-                const response = await axios.get(`http://localhost:3001/api/props/${id}`, {
+                const response = await axios.get(`${API_BASE}/api/props/${id}`, {
                     withCredentials: true
                 });
                 setState(response.data);
@@ -22,15 +23,15 @@ export default function PropertyPage(props) {
         loadData();
     }, [props]);
     return (
-        <div>
-            <div className="container mt-5 pt-3 px-5">
+        <div className="container-fluid">
+            <div className="mt-5 pt-3">
                 <CarouselComponent images={state && state.images} />
             </div>
-            <div className="container-fluid px-5">
+            <div className="mx-3">
                 <hr />
                 <div className="row">
                     <div className="col-lg-7">
-                        <div className="card my-2 mx-1">
+                        <div className="card my-2">
                             <div className="card-header">
                                 <h4 className="card-title">Description</h4>
                             </div>
@@ -40,7 +41,7 @@ export default function PropertyPage(props) {
                                 </p>
                             </div>
                         </div>
-                        <div className="card my-2 mx-1">
+                        <div className="card my-2">
                             <div className="card-header">
                                 <h4 className="card-title">For events</h4>
                             </div>
@@ -52,7 +53,7 @@ export default function PropertyPage(props) {
                                 </div>
                             </div>
                         </div>
-                        <div className="card my-2 mx-1">
+                        <div className="card my-2">
                             <div className="card-header">
                                 <h4 className="card-title">Other property details</h4>
                             </div>

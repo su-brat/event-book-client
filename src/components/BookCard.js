@@ -4,6 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
 import {SessionContext} from '../contexts/session.context';
+import {API_BASE} from '../global/variables';
 
 const dateTimeString = dateTime => {
     return `${dateTime.getMonth()+1}-${dateTime.getDate()}-${dateTime.getFullYear()} ${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
@@ -31,7 +32,7 @@ export default withRouter(function BookCard(props) {
                 const startDateAndTime = dateString(eventDate) + " " + startTime;
                 const endDateAndTime = dateString(eventDate) + " " + endTime;
                 try {
-                    const response = await axios.post('http://localhost:3001/customer/request-booking', { startDateAndTime, endDateAndTime, propId: props.propId, type }, {
+                    const response = await axios.post(`${API_BASE}/customer/request-booking`, { startDateAndTime, endDateAndTime, propId: props.propId, type }, {
                         withCredentials: true
                     });
                     // redirect response to PostResult page
@@ -99,7 +100,7 @@ export default withRouter(function BookCard(props) {
             const startDateTime = dateTimeString(eventDate);
             const endDateTime = dateString(eventDate)+" 23:59:59";
             console.log(" ... response");
-            const response = await axios.get(`http://localhost:3001/api/event-bookings?propId=${props.propId}&fromDate=${startDateTime}&toDate=${endDateTime}`, {
+            const response = await axios.get(`${API_BASE}/api/event-bookings?propId=${props.propId}&fromDate=${startDateTime}&toDate=${endDateTime}`, {
                 withCredentials: true
             });
             console.log(response);

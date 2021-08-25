@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import BookingCard from './components/BookingCard';
 import {SessionContext} from './contexts/session.context';
 import axios from 'axios';
+import {API_BASE} from './global/variables';
 
 export default function BookingList(props) {
     const [bookings, setBookings] = useState([]);
@@ -9,7 +10,7 @@ export default function BookingList(props) {
     useEffect(() => {
         async function fetchBookings() {
             try {
-                const response = await axios.get(`http://localhost:3001/customer/event-bookings/${user._id}`, {
+                const response = await axios.get(`${API_BASE}/customer/event-bookings/${user._id}`, {
                     withCredentials: true
                 });
                 setBookings(response.data.bookings);

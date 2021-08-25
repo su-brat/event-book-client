@@ -41,10 +41,10 @@ export default withRouter(function ToggleNavbar(props) {
                     ) : ( 
                             
                             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                                <li className="nav-item p-1 my-auto">
+                                <li className="nav-item p-1 m-auto">
                                     <Link to="/login" className="btn btn-sm btn-danger" type="button">Login</Link>
                                 </li>
-                                <li className="nav-item p-1 my-auto">
+                                <li className="nav-item p-1 m-auto">
                                     <Link to="/register" className="btn btn-sm btn-outline-success" type="button">Sign up</Link>
                                 </li>
                             </ul>
