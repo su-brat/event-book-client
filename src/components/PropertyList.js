@@ -17,19 +17,37 @@ const reduce = (state, action) => {
 export default function PropertyList(props) {
     const [state, dispatch] = useReducer(reduce, {properties: [], isLoading: false});
     useEffect(() => {
-        dispatch({type: "LOADING"});
-        const {city, lng, lat} = props;
-        let query = 'available=true&';
-        if(lng && lat)
-            query += `lng=${lng}&lat=${lat}&dist=30`;
-        else
-            query += `city=${city}`;
-        axios.get(`${API_BASE}/api/props?${query}`, {
-            withCredentials: true
-        })
-        .then(res => res.data.props)
-        .then(properties => dispatch({type: "SET_PROPERTIES", payload: properties}))
-        .catch(err => console.log(err));
+        async function setProperties() {
+            const {city, lng, lat, filter, maxPrice, minCapacity, occasion} = props;
+            async function fetchData() {
+                dispatch({type: "LOADING"});
+                let query = 'available=true';
+                if(lng && lat)
+                    query += `&lng=${lng}&lat=${lat}&dist=30`;
+                else
+                    query += `&city=${city}`;
+                try {
+                    const res = await axios.get(`${API_BASE}/api/props?${query}`, {
+                        withCredentials: true
+                    });
+                    return res.data.props;
+                } catch (e) {
+                    console.log(e);
+                    return null;
+                }
+            }
+            let properties = await fetchData();
+            if(filter && properties) {
+                if(occasion)
+                    properties = properties.filter(p => p.functiontype.map(o => o.toUpperCase()).includes(occasion.toUpperCase()));
+                if(maxPrice)
+                    properties = properties.filter(p => p.priceperhour <= maxPrice);
+                if(minCapacity)
+                    properties = properties.filter(p => p.capacity >= minCapacity);
+            }
+            dispatch({type: "SET_PROPERTIES", payload: properties});
+        }
+        setProperties();
     }, [props]);
     return (
         <div className="container-fluid">

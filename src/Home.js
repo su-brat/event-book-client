@@ -1,7 +1,6 @@
 import React, {useReducer} from 'react';
 import FindPropForm from './components/FindPropForm';
-import FilterTab from './components/FilterTab';
-import PropertyList from './components/PropertyList';
+import FilterResult from './components/FilterResult';
 
 function reduce(state, action) {
     return {city: action.city, lng: action.lng, lat: action.lat};
@@ -25,8 +24,7 @@ function Home() {
         {(state.city || (state.lng && state.lat)) && (
           <div>
             <hr />
-            <FilterTab />
-            <PropertyList {...state} />
+            <FilterResult {...state} />
           </div>
         )}
       </div>
