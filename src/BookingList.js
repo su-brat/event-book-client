@@ -13,7 +13,8 @@ export default function BookingList(props) {
                 const response = await axios.get(`${API_BASE}/customer/event-bookings/${user._id}`, {
                     withCredentials: true
                 });
-                setBookings(response.data.bookings);
+                const data = response.data.bookings.sort((a, b) => new Date(b.bookingDate) - new Date(a.bookingDate));
+                setBookings(data);
             } catch (error) {
                 console.log(error);
             }
