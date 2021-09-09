@@ -1,5 +1,6 @@
 {
   "name": "event-book-client",
+  "homepage": "https://festan.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

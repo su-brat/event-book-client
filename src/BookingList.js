@@ -25,7 +25,7 @@ export default function BookingList(props) {
         <div className="mt-5 pt-3 container">
             <div className="row row-cols-auto">
                 {bookings.length>0 ? (bookings.map(booking => <BookingCard className="col" key={booking._id} {...booking}/>)) : (
-                    <div>No bookings found</div>
+                    <div className="mx-auto my-5">No bookings found</div>
                 )}
             </div>
         </div>

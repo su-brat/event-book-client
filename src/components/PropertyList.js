@@ -51,7 +51,7 @@ export default function PropertyList(props) {
     }, [props]);
     return (
         <div className="container-fluid">
-            {state.isLoading && <div className="text-secondary">Loading...</div>}
+            {state.isLoading && <div className="text-secondary text-center mt-5">Loading...</div>}
             {!state.isLoading && (state.properties.length>0 ? (
                 <div className="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                     {state.properties.map(property => {
@@ -59,7 +59,7 @@ export default function PropertyList(props) {
                     })}
                 </div>
             ) : (
-                <div className="text-center">No results found</div>
+                <div className="text-center mt-5">No results found</div>
             ))}
         </div>
     );
