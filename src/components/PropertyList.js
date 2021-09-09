@@ -8,7 +8,7 @@ const reduce = (state, action) => {
         case "LOADING":
             return {...state, isLoading: true};
         case "SET_PROPERTIES":
-            return {...state, properties: [...action.payload], isLoading: false};
+            return {...state, properties: action.payload?[...action.payload]:[], isLoading: false};
         default:
             return state;
     }
